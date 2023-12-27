@@ -1,0 +1,31 @@
+FROM node:19-alpine AS build
+WORKDIR /usr/src/ff
+
+COPY ./common/src ./common/src
+COPY ./common/package*.json ./common
+COPY ./common/tsconfig.json ./common
+RUN cd common && npm ci && npm run build
+
+COPY ./app1/src ./app1/src
+COPY ./app1/package*.json ./app1
+COPY ./app1/tsconfig.json ./app1
+RUN cd app1 && npm ci && npm run build
+
+# FROM node:19-alpine AS deps
+# WORKDIR /usr/src/ff
+# COPY ./app1/package*.json ./app1/
+# RUN cd app1 && npm ci --production
+
+
+FROM node:19-alpine
+WORKDIR /usr/src/ff
+COPY ./app1/package.json ./app1/package.json 
+COPY --from=build /usr/src/ff/app1/node_modules ./app1/node_modules
+COPY --from=build /usr/src/ff/app1/dist-app1 ./app1/dist-app1
+
+COPY ./common/package.json ./common/package.json
+COPY --from=build /usr/src/ff/common/node_modules ./common/node_modules
+COPY --from=build /usr/src/ff/common/dist ./common/dist
+CMD cd app1 && npm start
+
+#ENTRYPOINT ["tail", "-f", "/dev/null"]

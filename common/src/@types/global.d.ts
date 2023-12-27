@@ -1,0 +1,3 @@
+type MessageDTO = {
+  text: string;
+};

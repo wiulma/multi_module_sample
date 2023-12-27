@@ -1,0 +1,12 @@
+FROM node:19-alpine
+WORKDIR /usr/src/ff
+
+COPY ./common/src ./common/src
+COPY ./common/package*.json ./common
+COPY ./common/tsconfig.json ./common
+RUN cd common && npm ci && npm run build
+
+COPY ./app1/src ./app1/src
+COPY ./app1/package*.json ./app1
+COPY ./app1/tsconfig.json ./app1
+RUN cd app1 && npm ci && npm start

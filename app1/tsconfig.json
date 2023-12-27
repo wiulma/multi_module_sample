@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "module": "node16",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "target": "es2022",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "outDir": "./dist-app1",
+    "baseUrl": ".",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true
+  },
+}
