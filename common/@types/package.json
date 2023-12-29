@@ -1,0 +1,11 @@
+{
+  "name": "@types/common",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "types": "index.d.ts",
+  "scripts": {},
+  "dependencies": {
+    "@types/node": "*"
+  }
+}

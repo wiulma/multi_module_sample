@@ -1,0 +1,3 @@
+type SampleType = {
+  test: string;
+};
